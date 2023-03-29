@@ -1,0 +1,11 @@
+name: xpSave
+version: '${project.version}'
+main: org.silvius.granatorb.Granatorb
+api-version: 1.19
+commands:
+  granatorb:
+    usage: /granatorb
+    aliases: []
+    description: gives the granaor item
+
+
