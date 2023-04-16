@@ -31,7 +31,7 @@ public class CustomEnchantment extends Enchantment {
 
 
     @Override
-    public EnchantmentTarget getItemTarget() {
+    public @NotNull EnchantmentTarget getItemTarget() {
         return EnchantmentTarget.ARMOR;
     }
 
@@ -46,7 +46,7 @@ public class CustomEnchantment extends Enchantment {
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NotNull NamespacedKey getKey() {
         return super.getKey();
     }
 
@@ -61,12 +61,12 @@ public class CustomEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean conflictsWith(Enchantment other) {
+    public boolean conflictsWith(@NotNull Enchantment other) {
         return false;
     }
 
     @Override
-    public boolean canEnchantItem(ItemStack item) {
+    public boolean canEnchantItem(@NotNull ItemStack item) {
         return true;
     }
 
@@ -96,7 +96,7 @@ public class CustomEnchantment extends Enchantment {
     }
 
     @Override
-    public Set<EquipmentSlot> getActiveSlots() {
+    public @NotNull Set<EquipmentSlot> getActiveSlots() {
         return Collections.singleton(EquipmentSlot.HAND);
     }
 

@@ -1,7 +1,9 @@
 package org.silvius.granatorb;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,15 +19,16 @@ public class Utilities {
         PersistentDataContainer data = meta.getPersistentDataContainer();
         NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
 
-        ArrayList< String > lore = new ArrayList < > ();
-        lore.add(" ");
-        ExperienceCalc.changeExp(player, -xpDrain);
-        lore.add(granatOrbCommand.getLoreColor() + Integer.toString((int) Math.round(newXp))+"/1400 VZ-Erfahrung");
+        ArrayList< Component > lore = new ArrayList < > ();
+        lore.add(Component.text(" "));
+        //ExperienceCalc.changeExp(player, -xpDrain);
+        player.giveExp(-xpDrain);
+        lore.add(Component.text(granatOrbCommand.getLoreColor() + Integer.toString((int) Math.round(newXp))+"/1400 VZ-Erfahrung"));
         data.set(namespacedKey, PersistentDataType.DOUBLE, newXp);
         if(sendtitle) {
             player.sendTitle(ChatColor.RED + "Granatorb!", granatOrbCommand.getLoreColor() + Integer.toString((int) Math.round(newXp)) + "/1400 VZ-Erfahrung", 0, 20, 6);
         }
-        meta.setLore(lore);
+        meta.lore(lore);
         item.setItemMeta(meta);
     }
 
@@ -36,12 +39,14 @@ public class Utilities {
 
         //item.removeEnchantment(XpSave.customEnchantment);
         meta.removeEnchant(Granatorb.customEnchantment);
-        ArrayList < String > lore = new ArrayList < > ();
-        lore.add(" ");
+        ArrayList < Component > lore = new ArrayList < > ();
+        lore.add(Component.text(" "));
         ExperienceCalc.changeExp(player, (int) Math.round(0.9*xpAmount));
-        lore.add(granatOrbCommand.getLoreColor() + "0/1400 VZ-Erfahrung");
+        lore.add(Component.text(granatOrbCommand.getLoreColor() + "0/1400 VZ-Erfahrung"));
         data.set(namespacedKey, PersistentDataType.DOUBLE, 0d);
-        meta.setLore(lore);
+        meta.lore(lore);
         item.setItemMeta(meta);
+        player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 10, 0.95f);
+        item.setAmount(0);
     }
 }

@@ -108,8 +108,4 @@ public class ExperienceCalc {
         player.setExp((float) (levelAndExp - level));
     }
 
-    public static int getExpToNext(Player player) {
-        return getExpFromLevel(player.getLevel()) - getExp(player);
-    }
-
 }

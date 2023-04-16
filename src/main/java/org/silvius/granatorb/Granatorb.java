@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-public final class Granatorb extends JavaPlugin implements @NotNull Listener {
+public final class Granatorb extends JavaPlugin implements Listener {
     private static Granatorb plugin;
     public static CustomEnchantment customEnchantment;
 
@@ -27,7 +27,7 @@ public final class Granatorb extends JavaPlugin implements @NotNull Listener {
         customEnchantment = new CustomEnchantment("granatorb");
         registerEnchantment(customEnchantment);
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new BlockListeners(), this);
+        pluginManager.registerEvents(new Listeners(), this);
 
 
     }
@@ -40,42 +40,33 @@ public final class Granatorb extends JavaPlugin implements @NotNull Listener {
     @Override
     public void onDisable() {
         try {
-            Field keyField = Enchantment.class.getDeclaredField("byKey");
+            final Field keyField = Enchantment.class.getDeclaredField("byKey");
 
             keyField.setAccessible(true);
             @SuppressWarnings("unchecked")
             HashMap<NamespacedKey, Enchantment> byKey = (HashMap<NamespacedKey, Enchantment>) keyField.get(null);
 
 
-            if(byKey.containsKey(customEnchantment.getKey())) {
-                byKey.remove(customEnchantment.getKey());
-            }
-            Field nameField = Enchantment.class.getDeclaredField("byName");
+            byKey.remove(customEnchantment.getKey());
+            final Field nameField = Enchantment.class.getDeclaredField("byName");
 
             nameField.setAccessible(true);
             @SuppressWarnings("unchecked")
             HashMap<String, Enchantment> byName = (HashMap<String, Enchantment>) nameField.get(null);
 
-            if(byName.containsKey(customEnchantment.getName())) {
-                byName.remove(customEnchantment.getName());
-            }
+            byName.remove(customEnchantment.getName());
         } catch (Exception ignored) { }
     }
 
     public static void registerEnchantment(Enchantment enchantment) {
-        boolean registered = true;
         try {
-            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            final Field f = Enchantment.class.getDeclaredField("acceptingNew");
             f.setAccessible(true);
             f.set(null, true);
             Enchantment.registerEnchantment(enchantment);
 
         } catch (Exception e) {
-            registered = false;
             e.printStackTrace();
-        }
-        if(registered){
-            // It's been registered!
         }
     }
 
