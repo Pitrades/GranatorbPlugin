@@ -9,3 +9,7 @@ commands:
     description: gives the granaor item
 
 
+permissions:
+  xpSave.granatorb:
+    description: Gives the commandSender the "granatorb" item
+

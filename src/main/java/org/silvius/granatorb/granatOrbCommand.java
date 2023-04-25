@@ -25,7 +25,7 @@ public class granatOrbCommand implements CommandExecutor {
             final Player player = ((Player) commandSender).getPlayer();
 
             assert player != null;
-            if(!player.hasPermission("lyriaseelenbindung.seelenbindung")){
+            if(!player.hasPermission("xpSave.granatorb")){
                 commandSender.sendMessage(ChatColor.RED+"Keine Berechtigung");
                 return true;
             }

@@ -26,7 +26,7 @@ public class CustomEnchantment extends Enchantment {
 
     @Override
     public @NotNull String getName() {
-        return "ah";
+        return "Granatorb";
     }
 
 
