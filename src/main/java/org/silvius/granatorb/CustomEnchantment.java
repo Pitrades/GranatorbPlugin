@@ -72,7 +72,7 @@ public class CustomEnchantment extends Enchantment {
 
     @Override
     public @NotNull Component displayName(int i) {
-        return Component.text("HSH");
+        return Component.text("Granatorb");
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,25 +49,7 @@ public class Listeners implements Listener {
 
 
 
-    @EventHandler
-    public void onEnchantItem(EnchantItemEvent event) {
-        final ItemStack item = event.getItem();
-        final ItemMeta meta = item.getItemMeta();
-        if(meta==null){return;}
-        final PersistentDataContainer data = meta.getPersistentDataContainer();
-        final NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
-        if (data.has(namespacedKey)) {
-            final ArrayList<Component> lore = new ArrayList<>();
-            lore.add(Component.text(" "));
-            final double xpAmount = data.get(namespacedKey, PersistentDataType.DOUBLE);
-            final double newXp = xpAmount + 1395;
-            lore.add(Component.text(granatOrbCommand.getLoreColor() + Integer.toString((int) Math.floor(xpAmount)) + "/1000 VZ-Erfahrung"));
-            data.set(namespacedKey, PersistentDataType.DOUBLE, newXp);
-            meta.lore(lore);
-            item.setItemMeta(meta);
-            event.getEnchanter().setLevel(event.getEnchanter().getLevel() - 30);
-        }
-    }
+
 
 
     public void fillAnimation(Player player, Block block){
@@ -244,7 +227,7 @@ public class Listeners implements Listener {
                     }
                     final double newXp = xpAmount / stackSize + (double) xpDrain / stackSize;
                     if (newXp >= 1400) {
-                        item.addUnsafeEnchantment(Granatorb.customEnchantment, 1);
+                        item.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
                         player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 10, 1);
                         Utilities.granatOrbCharge(player, (int) Math.round(1400 * stackSize - xpAmount), 1400, item, true);
                         return;
@@ -284,7 +267,7 @@ public class Listeners implements Listener {
                         continue;
                     }
                     if (newXp >= 1400) {
-                        item.addUnsafeEnchantment(Granatorb.customEnchantment, 1);
+                        item.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
                         player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 10, 1);
                         Utilities.granatOrbCharge(player, (int) Math.ceil((newXp-1400)*stackSize), 1400, item, false);
                         return;

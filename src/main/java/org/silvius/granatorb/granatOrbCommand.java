@@ -32,10 +32,11 @@ public class granatOrbCommand implements CommandExecutor {
             commandSender.sendMessage("Du hast einen Granatorb erhalten");
             final ItemStack stack = new ItemStack(Material.LAPIS_LAZULI);
             final ItemMeta meta = stack.getItemMeta();
-            meta.displayName(Component.text(ChatColor.RED + "Granatorb"));
+            meta.displayName(Component.text(ChatColor.RED + "Granat-Orb"));
             ArrayList<Component> lore = new ArrayList<>();
-            lore.add(Component.text(" "));
-            lore.add(Component.text(ChatColor.LIGHT_PURPLE + "0/1400 VZ-Erfahrung"));
+            lore.add(Component.text("Dieser rötlich schimmernde Granat sammelt magische Essenzen aus Eurer Umgebung"));
+            lore.add(Component.text(ChatColor.BLACK+"(CIT) Granatorb"));
+            lore.add(Component.text(ChatColor.RED + "VZ-Erfahrung: " + ChatColor.GRAY+"0/1400"));
             final PersistentDataContainer data = meta.getPersistentDataContainer();
             final NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
             data.set(namespacedKey, PersistentDataType.DOUBLE, 0d);

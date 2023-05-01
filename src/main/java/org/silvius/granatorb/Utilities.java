@@ -11,6 +11,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Utilities {
     public static void granatOrbCharge(Player player, int xpDrain, double newXp,  ItemStack item, boolean sendtitle){
@@ -18,15 +19,12 @@ public class Utilities {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer data = meta.getPersistentDataContainer();
         NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
-
-        ArrayList< Component > lore = new ArrayList < > ();
-        lore.add(Component.text(" "));
-        //ExperienceCalc.changeExp(player, -xpDrain);
+        ArrayList<Component> lore = new ArrayList<>(Objects.requireNonNull(meta.lore()));
         player.giveExp(-xpDrain);
-        lore.add(Component.text(granatOrbCommand.getLoreColor() + Integer.toString((int) Math.round(newXp))+"/1400 VZ-Erfahrung"));
+        lore.set(2, Component.text(ChatColor.RED + "VZ-Erfahrung: " + ChatColor.GRAY+((int) Math.round(newXp))+"/1400"));
         data.set(namespacedKey, PersistentDataType.DOUBLE, newXp);
         if(sendtitle) {
-            player.sendTitle(ChatColor.RED + "Granatorb!", granatOrbCommand.getLoreColor() + Integer.toString((int) Math.round(newXp)) + "/1400 VZ-Erfahrung", 0, 20, 6);
+            player.sendTitle(ChatColor.RED + "Granatorb!", ChatColor.RED + "VZ-Erfahrung: " + ChatColor.GRAY+((int) Math.round(newXp))+"/1400", 0, 20, 6);
         }
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -38,11 +36,10 @@ public class Utilities {
         NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
 
         //item.removeEnchantment(XpSave.customEnchantment);
-        meta.removeEnchant(Granatorb.customEnchantment);
-        ArrayList < Component > lore = new ArrayList < > ();
-        lore.add(Component.text(" "));
+        //meta.removeEnchant(Granatorb.customEnchantment);
+        ArrayList<Component> lore = new ArrayList<>(Objects.requireNonNull(meta.lore()));
         ExperienceCalc.changeExp(player, (int) Math.round(0.9*xpAmount));
-        lore.add(Component.text(granatOrbCommand.getLoreColor() + "0/1400 VZ-Erfahrung"));
+        lore.set(2, Component.text(ChatColor.RED + "VZ-Erfahrung: " + ChatColor.GRAY+"0/1400"));
         data.set(namespacedKey, PersistentDataType.DOUBLE, 0d);
         meta.lore(lore);
         item.setItemMeta(meta);
