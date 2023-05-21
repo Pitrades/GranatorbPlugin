@@ -1,6 +1,7 @@
 package org.silvius.granatorb;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
@@ -34,8 +35,9 @@ public class granatOrbCommand implements CommandExecutor {
             final ItemMeta meta = stack.getItemMeta();
             meta.displayName(Component.text(ChatColor.RED + "Granat-Orb"));
             ArrayList<Component> lore = new ArrayList<>();
-            lore.add(Component.text("Dieser rötlich schimmernde Granat sammelt magische Essenzen aus Eurer Umgebung"));
-            lore.add(Component.text(ChatColor.BLACK+"(CIT) Granatorb"));
+            lore.add(Component.text("Dieser rötlich schimmernde Granat sammelt"));
+            lore.add(Component.text( "magische Essenzen aus Eurer Umgebung"));
+            lore.add(Component.text("(CIT) Granatorb").color(NamedTextColor.BLACK));
             lore.add(Component.text(ChatColor.RED + "VZ-Erfahrung: " + ChatColor.GRAY+"0/1400"));
             final PersistentDataContainer data = meta.getPersistentDataContainer();
             final NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
