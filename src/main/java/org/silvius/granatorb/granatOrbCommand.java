@@ -43,7 +43,6 @@ public class granatOrbCommand implements CommandExecutor {
             final NamespacedKey namespacedKey = new NamespacedKey(Granatorb.getPlugin(), "xpStored");
             data.set(namespacedKey, PersistentDataType.DOUBLE, 0d);
             meta.lore(lore);
-            stack.addUnsafeEnchantment(Granatorb.customEnchantment, 1);
             stack.setItemMeta(meta);
             player.getInventory().addItem(stack);
 
